@@ -10,7 +10,7 @@
   "license": "Proprietary",
   "scripts": {
     "start": "node server/server.js",
-    "postinstall": "grunt build",
+    "postinstall": "bower install && grunt build",
     "test": "karma start test/karma.conf.js"
   },
   "dependencies": {
