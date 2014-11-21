@@ -34,7 +34,7 @@
         <!-- dropdown button. not working yet but in progress. -->
         
         <li>
-          <button ng-click="displayNotifications()" type="button" class="btn btn-default dropstyle white"><span class="glyphicon glyphicon-bell white"></span></button>
+          <button type="button" class="btn btn-default dropstyle white" ng-click='removeUnreadNotificationsCount()'><span class="glyphicon glyphicon-bell white"></span><span ng-if="unreadNotificationsCount">{{unreadNotificationsCount}}</span></button>
           <button type="button" class="btn btn-default dropstyle white" data-html="true" data-animation="am-flip-x" data-template="../app/modules/pages/partials/dropdown.tpl.html" bs-dropdown="dropdown" placement="bottom-left" container="body"><span class="glyphicon glyphicon-cog white"></span>
           </button>
     	</li>

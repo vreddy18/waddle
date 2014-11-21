@@ -48,12 +48,23 @@ var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFact
     // });
   }
 
-  $scope.displayNotifications = function () {
+  $scope.loadNotifications = function () {
     UserRequests.fetchNotifications(window.sessionStorage.userFbID)
     .then(function (notifications) {
       $scope.notifications = notifications.data;
+      if($scope.notifications.length > 0) {
+        $scope.unreadNotificationsCount = $scope.notifications.length;
+      }
     });
   }
+
+  $scope.loadNotifications();
+
+  $scope.removeUnreadNotificationsCount = function () {
+    console.log('hi')
+    $scope.unreadNotificationsCount = null;
+  }
+
 
 
   // var myDropdown = $dropdown(element, {title: 'blah', content: 'bsadsda'});
