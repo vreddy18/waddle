@@ -31,7 +31,9 @@ module.exports = function (grunt) {
 					'client/bower_components/angular-strap/src/helpers/dimensions.js',
 					'client/bower_components/angular-strap/src/tooltip/tooltip.js',
 					'client/bower_components/angular-strap/src/dropdown/dropdown.js',
-					'client/bower_components/angular-sanitize/angular-sanitize.min.js'
+					'client/bower_components/angular-sanitize/angular-sanitize.min.js',
+					'client/bower_components/angular-animate/angular-animate.min.js',
+					'client/bower_components/angular-socket-io/socket.min.js'
 				]
 			}
 		},
