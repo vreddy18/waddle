@@ -187,7 +187,7 @@ utils.parseCheckin = function (checkin) {
   // var deferred = Q.defer();
 
   var formattedCheckin = {
-    'checkinID': checkin.ID,
+    'checkinID': checkin.id,
     'name': checkin.venue.name,
     'lat': checkin.venue.location.lat,
     'lng': checkin.venue.location.lng,
