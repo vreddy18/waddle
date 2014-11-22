@@ -1,6 +1,6 @@
 (function(){
 
-var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFactory, $state, $dropdown, FootprintRequests){
+var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFactory, $state, FootprintRequests){
   $scope.logout = Auth.logout;
 
   $scope.loadBucketlist = function () {
@@ -78,7 +78,7 @@ var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFact
 }
 
 //Inject all the dependent services needed by the controller
-NavbarController.$inject = ['Auth', '$rootScope', '$scope', 'UserRequests', 'MapFactory', '$state', '$dropdown', 'FootprintRequests'];
+NavbarController.$inject = ['Auth', '$rootScope', '$scope', 'UserRequests', 'MapFactory', '$state', 'FootprintRequests'];
 
 angular.module('waddle.navbar', [])
   .controller('NavbarController', NavbarController);
