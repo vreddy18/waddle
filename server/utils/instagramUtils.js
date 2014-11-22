@@ -145,6 +145,7 @@ utils.parseIGPost = function (post, user) {
     'caption': 'null',
     'foursquareID': 'null',
     'country': 'null',
+    'city': 'null',
     'category': 'null',
     'source': 'instagram'
   };

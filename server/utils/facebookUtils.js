@@ -254,6 +254,7 @@ utils.parseFBData = function (user, data) {
         'photoLarge': 'null',
         'caption': 'null',
         'foursquareID': 'null',
+        'city': 'null',
         'country': 'null',
         'category': 'null',
         'source': 'facebook'
