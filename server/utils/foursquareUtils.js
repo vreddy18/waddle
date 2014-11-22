@@ -187,7 +187,7 @@ utils.parseCheckin = function (checkin) {
   var deferred = Q.defer();
 
   var formattedCheckin = {
-    'checkinID': checkin.id,
+    'checkinID': 'null',
     'name': checkin.venue.name,
     'lat': checkin.venue.location.lat,
     'lng': checkin.venue.location.lng,
@@ -204,6 +204,13 @@ utils.parseCheckin = function (checkin) {
     'category': 'null',
     'source': 'foursquare'
   };
+
+  if(checkin.id) {
+    formattedCheckin.checkinID = checkin.id;
+  }
+  else {
+    formattedCheckin.checkinID = uuid.v4();
+  }
 
   if (checkin.venue.categories[0]) {
     formattedCheckin.category = checkin.venue.categories[0].name;
