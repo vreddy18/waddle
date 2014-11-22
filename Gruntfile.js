@@ -95,6 +95,10 @@ module.exports = function (grunt) {
         }
       },
       build : {
+      	options: {
+	    		mangle: false,
+	    		beautify: true
+	    	},
       	files: {
           'client/dist/app.min.js': ['client/dist/bower.js', 'client/dist/app.js']
         }
