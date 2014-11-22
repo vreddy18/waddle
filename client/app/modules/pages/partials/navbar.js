@@ -34,7 +34,7 @@ var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFact
   };
 
   $scope.loadFootprint = function (notification) {
-    console.log(notification);
+    console.log("loading notifications!!: ", notification);
     $scope.$root.$broadcast("displayFootprint", notification);
     // $scope.footprint = {checkin: notification.checkin, place: notification.place};
     // var checkinID = notification.checkin.checkinID;
@@ -49,11 +49,13 @@ var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFact
   }
 
   $scope.loadNotifications = function () {
+    var notifications;
     UserRequests.fetchNotifications(window.sessionStorage.userFbID)
     .then(function (notifications) {
-      $scope.notifications = notifications.data;
-      if($scope.notifications.length > 0) {
-        $scope.unreadNotificationsCount = $scope.notifications.length;
+      notifications = notifications.data;
+      generateNotificationsDropdown(notifications);
+      if(notifications.length > 0) {
+        $scope.unreadNotificationsCount = notifications.length;
       }
     });
   }
@@ -61,11 +63,20 @@ var NavbarController = function (Auth, $rootScope, $scope, UserRequests, MapFact
   $scope.loadNotifications();
 
   $scope.removeUnreadNotificationsCount = function () {
-    console.log('hi')
     $scope.unreadNotificationsCount = null;
   }
 
-
+  var generateNotificationsDropdown = function(notifications) {
+    $scope.notificationsDropdown = [];
+    var dropdownItem = {};
+    for(var i = 0; i < notifications.length; i++) {
+      dropdownItem.text = '<p class="fa fa-download"></p>&nbsp;' + notifications[i].commenter.name + " commented on your footprint at " + notifications[i].place.name;
+      // dropdownItem.click = 'loadFootprint(' + JSON.stringify(notifications[i]) + ')';
+      dropdownItem.href = "/#/map/feed/" + notifications[i].checkin.checkinID;
+      $scope.notificationsDropdown.push(dropdownItem);
+    }
+    console.log($scope.notificationsDropdown);
+  }
 
   // var myDropdown = $dropdown(element, {title: 'blah', content: 'bsadsda'});
 

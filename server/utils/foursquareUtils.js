@@ -242,6 +242,40 @@ utils.parseCheckin = function (checkin) {
   return formattedCheckin;
 };
 
+utils.searchFoursquareVenues = function (user, near, query) {
+  var deferred = Q.defer();
+
+  var query = {
+    v: '20141111',
+    near: near,
+    query: query,
+    intent: 'checkin'
+  };
+
+  var oauthToken = user.getProperty('fsqToken');
+
+  if (oauthToken) {
+    query.oauth_token = oauthToken;
+  } else {
+    query.client_id = process.env.WADDLE_FOURSQUARE_CLIENT_ID;
+    query.client_secret = process.env.WADDLE_FOURSQUARE_CLIENT_SECRET;
+  }
+
+  var queryPath = 'https://api.foursquare.com/v2/venues/search?' + qs.stringify(query);
+  console.log(queryPath);
+
+  helpers.httpsGet(queryPath)
+  .then(function (data) {
+    var venues = JSON.parse(data).response.venues;
+    deferred.resolve(venues);
+  })
+  .catch(function (e) {
+    deferred.reject(e);
+  });
+
+  return deferred.promise;
+}
+
 utils.generateFoursquarePlaceID = function (user, name, latlng) {
   var deferred = Q.defer();
 

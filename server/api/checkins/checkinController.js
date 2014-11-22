@@ -36,6 +36,26 @@ checkinController.handleNativeCheckin = function (req, res) {
   res.status(200).end();
 };
 
+checkinController.searchFoursquareVenues = function (req, res) {
+  var user, foursquareToken;
+  var facebookID = req.params.facebookID;
+  var near = req.params.near;
+  var query = req.params.query;
+
+  User.find({facebookID: facebookID})
+  .then(function (userNode) {
+    user = userNode;
+    return foursquareUtils.searchFoursquareVenues(user, near, query);
+  })
+  .then(function (venues) {
+    res.json(venues);
+  })
+  .catch(function (err){
+    console.log(err);
+    res.status(500).end();
+  });
+}
+
 checkinController.instagramHubChallenge = function (req, res) {
   res.status(200).send(req.query['hub.challenge']);
 };

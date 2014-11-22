@@ -29,10 +29,10 @@ var CheckinController = function ($scope, NativeCheckin){
 	$scope.getAndParseUserInput = function () {
 		var venueQuery = $scope.venueQuery.replace(" ", "%20");
 		var locationQuery = $scope.locationQuery.replace(" ", "%20");
-		NativeCheckin.searchFoursquareVenues({near: locationQuery, query: venueQuery})
+		NativeCheckin.searchFoursquareVenues(window.sessionStorage.userFbID, {near: locationQuery, query: venueQuery})
 		.then(function (results) {
 			console.log(results);
-			$scope.venues = results.data.response.venues;
+			$scope.venues = results.data;
 		})
 	}
 }

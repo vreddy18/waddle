@@ -4,15 +4,24 @@ var NativeCheckin = function ($http, $q){
 
   return {
 
-	  searchFoursquareVenues: function (params) {
+	  // searchFoursquareVenues: function (params) {
+   //    if (params) {
+   //      return $http({
+   //        method: 'GET',
+   //        url: 'https://api.foursquare.com/v2/venues/search?' + 
+   //        'client_id=' + globals.WADDLE_FOURSQUARE_CLIENT_ID + 
+   //        '&client_secret=' + globals.WADDLE_FOURSQUARE_CLIENT_SECRET +
+   //        '&v=20141027' +
+   //        '&near=' + params.near + '&query=' + params.query
+   //      });
+   //    }
+   //  },
+
+     searchFoursquareVenues: function (facebookID, params) {
       if (params) {
         return $http({
           method: 'GET',
-          url: 'https://api.foursquare.com/v2/venues/search?' + 
-          'client_id=' + globals.WADDLE_FOURSQUARE_CLIENT_ID + 
-          '&client_secret=' + globals.WADDLE_FOURSQUARE_CLIENT_SECRET +
-          '&v=20141027' +
-          '&near=' + params.near + '&query=' + params.query
+          url: '/api/checkins/venuesearch/' + facebookID + '/' + params.query + '/' + params.near
         });
       }
     },
