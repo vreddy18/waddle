@@ -123,7 +123,7 @@ module.exports = function (grunt) {
 		grunt.task.run(['clean', 'concat:bower', 'concat:client', 'stylus', 'uglify:dev' , 'watch']);
 	});
 
-	grunt.registerTask('build', ['clean', 'bower', 'concat:bower', 'concat:client', 'stylus','uglify:build']);
+	grunt.registerTask('build', ['clean', 'bower:install', 'concat:bower', 'concat:client', 'stylus','uglify:build']);
 
 	grunt.registerTask('test', ['mochaTest']);
 };
