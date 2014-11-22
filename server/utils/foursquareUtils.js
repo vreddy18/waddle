@@ -91,7 +91,7 @@ utils.getFoursquareCheckinHistory = function (userAccessToken, offset) {
   var deferred = Q.defer();
 
   var query = {
-    v: '20140806',
+    v: '20141122',
     limit: '250',
     offset: offset.toString(),
     oauth_token: userAccessToken
@@ -184,6 +184,8 @@ utils.parseNativeCheckin = function (venue) {
 }
 
 utils.parseCheckin = function (checkin) {
+  var deferred = Q.defer();
+
   var formattedCheckin = {
     'checkinID': checkin.id,
     'name': checkin.venue.name,
@@ -223,7 +225,20 @@ utils.parseCheckin = function (checkin) {
     formattedCheckin.caption = checkin.shout;
   }
 
-  return formattedCheckin;
+  if(checkin.venue.location.city) {
+    formattedCheckin.city = checkin.venue.location.city;
+    deferred.resolve(formattedCheckin);
+  }
+  else {
+    helpers.findCityByReverseGeocoding(formattedCheckin.lat, formattedCheckin.lng)
+    .then(function (geocodeData) {
+      console.log(geocodeData);
+      formattedCheckin.city = geocodeData.features[0].place_name;
+      deferred.resolve(formattedCheckin);
+    })
+  }
+
+  return deferred.promise;
 };
 
 utils.generateFoursquarePlaceID = function (user, name, latlng) {

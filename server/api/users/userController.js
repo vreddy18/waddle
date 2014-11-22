@@ -179,6 +179,7 @@ userController.addFoursquareData = function (req, res) {
   })
   .then(function (userNode) {
     user = userNode;
+    console.log("RIGHT BEFORE FOURSQUARE DATA FETCH");
     return foursquareUtils.tabThroughFoursquareCheckinHistory(user);
   })
   .then(function (foursquareHistoryBucket) {
