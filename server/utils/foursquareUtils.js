@@ -187,7 +187,7 @@ utils.parseCheckin = function (checkin) {
   var deferred = Q.defer();
 
   var formattedCheckin = {
-    'checkinID': 'null',
+    'checkinID': checkin.ID,
     'name': checkin.venue.name,
     'lat': checkin.venue.location.lat,
     'lng': checkin.venue.location.lng,
@@ -198,19 +198,12 @@ utils.parseCheckin = function (checkin) {
     'caption': 'null',
     'foursquareID': checkin.venue.id,
     'address': 'null',
-    'city': checkin.venue.location.city,
+    'city': 'null',
     'country': checkin.venue.location.country,
     'postalCode': 'null',
     'category': 'null',
     'source': 'foursquare'
   };
-
-  if(checkin.id) {
-    formattedCheckin.checkinID = checkin.id;
-  }
-  else {
-    formattedCheckin.checkinID = uuid.v4();
-  }
 
   if (checkin.venue.categories[0]) {
     formattedCheckin.category = checkin.venue.categories[0].name;
